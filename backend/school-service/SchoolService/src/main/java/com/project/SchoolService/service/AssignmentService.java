@@ -14,6 +14,7 @@ import java.util.Optional;
 public class AssignmentService {
 
     private final AssignmentRepository assignmentRepository;
+    @Autowired
     public AssignmentService(AssignmentRepository assignmentRepository) {
         this.assignmentRepository = assignmentRepository;
     }

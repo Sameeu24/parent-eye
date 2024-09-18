@@ -1,21 +1,23 @@
 package com.project.SchoolService.domain;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "exams")
+@Document(collection = "exams")
 public class Exam {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
 
     private Long id;
     private String subject;

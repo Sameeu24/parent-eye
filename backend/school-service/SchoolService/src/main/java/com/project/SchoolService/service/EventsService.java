@@ -10,10 +10,9 @@ import java.util.Optional;
 
 @Service
 public class EventsService {
-    @Autowired
     private final EventsRepository eventsRepository;
+    @Autowired
     public EventsService(EventsRepository eventsRepository) {
-
         this.eventsRepository = eventsRepository;
     }
    // CREATE

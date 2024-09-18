@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class ExamService {
-    @Autowired
+
     private final ExamRepository examRepository;
+    @Autowired
     public ExamService(ExamRepository examRepository) {
         this.examRepository = examRepository;
     }

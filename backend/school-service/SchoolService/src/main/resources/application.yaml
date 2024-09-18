@@ -1,25 +1,27 @@
 spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/new # Replace with your MongoDB URI
+      database: new                       # Specify your database name
+      username: ha                      # Optional: MongoDB username
+      password: hehe                       # Optional: MongoDB password
+      authentication-database: admin             # Optional: Authentication database
+      authentication-mechanism: SCRAM-SHA-256    # Optional: Authentication mechanism
+      port: 27017                                 # Optional: MongoDB port
   application:
-    name: my-spring-boot-app                     # Application name
-  datasource:
-    url: jdbc:h2:mem:testdb                        # H2 in-memory database URL
-    driver-class-name: org.h2.Driver                # H2 driver class name
-    username: sa                                     # Default username
-    password:                                         # Default password (empty)
-    platform: h2                                    # Database platform
-  h2:
-    console:
-      enabled: true                                 # Enable H2 console for easy access
-  jpa:
-    hibernate:
-      ddl-auto: update
-
+    name: my-spring-boot-app
+  main:
+    allow-bean-definition-overriding: true
+# Application name
 
 # Logging configuration
 logging:
   level:
     root: INFO
+    org.springframework.data.mongodb: DEBUG
 
 # Server configuration
 server:
-  port: 8080                                       # Server port
+  port: 8080                                    # Server port
+
+  # Additional properties can be added below
