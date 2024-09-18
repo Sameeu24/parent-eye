@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: my-spring-boot-app                     # Application name
+  datasource:
+    url: jdbc:h2:mem:testdb                        # H2 in-memory database URL
+    driver-class-name: org.h2.Driver                # H2 driver class name
+    username: sa                                     # Default username
+    password:                                         # Default password (empty)
+    platform: h2                                    # Database platform
+  h2:
+    console:
+      enabled: true                                 # Enable H2 console for easy access
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+# Logging configuration
+logging:
+  level:
+    root: INFO
+
+# Server configuration
+server:
+  port: 8080                                       # Server port

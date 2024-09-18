@@ -14,8 +14,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table
-
+@Table(name = "events")
 public class Events {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

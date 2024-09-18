@@ -12,12 +12,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/assignment")
 public class AssignmentController {
-    @Autowired
+
     private final AssignmentService assignmentService;
+
     public AssignmentController(AssignmentService assignmentService) {
         this.assignmentService = assignmentService;
     }
-    @PostMapping("/{id}")
+
+
+    @PostMapping
     public ResponseEntity<Assignment> createAssignment(@RequestBody Assignment assignment){
         Assignment assignment1 = assignmentService.createAssignment(assignment);
         return ResponseEntity.ok(assignment1);

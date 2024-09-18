@@ -13,8 +13,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table
-
+@Table(name = "assignments")
 public class Assignment {
 
     @Id

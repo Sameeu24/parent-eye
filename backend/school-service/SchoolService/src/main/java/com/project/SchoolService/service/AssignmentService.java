@@ -2,6 +2,7 @@ package com.project.SchoolService.service;
 
 
 import com.project.SchoolService.domain.Assignment;
+
 import com.project.SchoolService.repository.AssignmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,8 @@ import java.util.Optional;
 
 @Service
 public class AssignmentService {
-    @Autowired
-    private final AssignmentRepository assignmentRepository;
 
+    private final AssignmentRepository assignmentRepository;
     public AssignmentService(AssignmentRepository assignmentRepository) {
         this.assignmentRepository = assignmentRepository;
     }
