@@ -30,9 +30,8 @@ public class EventsService {
         if (events.isPresent()){
             return events.get();
         }else{
-            throw new RuntimeException();
+            throw new RuntimeException("Event not found with id :" + id);
         }
-
     }
     //UPDATE
     public Events updateEvents(Long id, Events events){
@@ -40,7 +39,7 @@ public class EventsService {
             events.setId(id);
             return eventsRepository.save(events);
         }else{
-            throw new RuntimeException();
+            throw new RuntimeException("Event not found with id :" + id);
         }
     }
     //DELETE
@@ -49,7 +48,7 @@ public class EventsService {
             eventsRepository.deleteById(id);
 
         }else{
-            throw new RuntimeException();
+            throw new RuntimeException("Event not found with id :" + id);
         }
     }
 
