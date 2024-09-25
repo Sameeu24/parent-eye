@@ -20,4 +20,8 @@ public class Link {
     private Long id;
     private String url;
 
+
+    @Enumerated(EnumType.STRING)
+    private LinkStatus linkStatus;
+
 }
