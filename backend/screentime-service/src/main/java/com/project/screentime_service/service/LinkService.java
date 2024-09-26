@@ -3,6 +3,9 @@ package com.project.screentime_service.service;
 import com.project.screentime_service.domain.Link;
 import com.project.screentime_service.domain.LinkStatus;
 import com.project.screentime_service.repository.LinkRepository;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +18,16 @@ public class LinkService {
 
     private final LinkRepository linkRepository;
     private final Random random = new Random();
+    private final RabbitTemplate rabbitTemplate;
 
-    public LinkService(LinkRepository linkRepository) {
+    @Value("${rabbitmq.queue.name}")
+    private String queueName;
+
+
+
+    public LinkService(LinkRepository linkRepository, RabbitTemplate rabbitTemplate) {
         this.linkRepository = linkRepository;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     @Scheduled(fixedRateString = "${scheduler.fixedRate:5000}") // Default to 5 seconds if not specified
@@ -39,11 +49,21 @@ public class LinkService {
         // Select a random duration (for example, between 1 and 10 seconds)
         int randomDuration = 1000 * (random.nextInt(10) + 1);
 
+        String message = String.format("Link: %s, Status: %s, Duration: %d ms", randomLink.getUrl(), randomLink.getLinkStatus(), randomDuration);
+        System.out.println("Sending message: " + message);
+
+        rabbitTemplate.convertAndSend(queueName, message);
+
         // Log the results
         System.out.printf("Selected link: %s, Status: %s, Duration: %d ms%n", randomLink.getUrl(), randomLink.getLinkStatus(), randomDuration);
 
         // Optional: Save the updated status to the database
         linkRepository.save(randomLink);
+    }
+
+    @RabbitListener(queues = "screen.queue.updated")
+    public void receiveUpdatedMessage(String message) {
+        System.out.println("Received updated message: " + message);
     }
 
     // Helper method to get a random status
