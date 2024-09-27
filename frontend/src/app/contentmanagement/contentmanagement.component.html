@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.2.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Main Container -->
+    <div class="flex min-h-screen">
+
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white border-r px-4 py-6">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-4">Logo</h2>
+                <nav>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="flex items-center py-2 px-3 text-blue-600 bg-blue-100 rounded-md">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li><a href="#" class="flex items-center py-2 px-3 text-gray-700">Projects</a></li>
+                        <li><a href="#" class="flex items-center py-2 px-3 text-gray-700">Analytics</a></li>
+                        <li><a href="#" class="flex items-center py-2 px-3 text-gray-700">Integrations</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                <h3 class="text-sm font-semibold mb-2 text-gray-600">Personal</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="flex items-center py-2 px-3 text-gray-700">Teams</a></li>
+                    <li><a href="#" class="flex items-center py-2 px-3 text-gray-700">Messages <span class="ml-2 text-red-500">N</span></a></li>
+                    <li><a href="#" class="flex items-center py-2 px-3 text-gray-700">Notifications</a></li>
+                    <li><a href="#" class="flex items-center py-2 px-3 text-gray-700">Setting</a></li>
+                </ul>
+            </div>
+            <div class="absolute bottom-6 left-6">
+                <div class="flex items-center">
+                    <img src="profile.jpg" alt="Profile" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <p class="font-semibold">Sergey Goldberg</p>
+                        <p class="text-sm text-gray-500">company.com</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <div class="flex-1 p-6">
+            <!-- Header -->
+            <header class="flex justify-between items-center mb-8">
+                <h1 class="text-2xl font-bold">Dashboard</h1>
+                <input type="text" placeholder="Search..." class="w-1/3 p-2 border rounded-md">
+            </header>
+
+            <!-- Overview Cards -->
+            <section class="grid grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-4 rounded-md shadow">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-lg font-bold text-gray-700">Total Usage</h4>
+                        <button class="text-pink-500">&#128722;</button>
+                    </div>
+                    <p class="text-3xl font-bold">4h</p>
+                    <!-- <p class="text-green-500 mt-2">+5.34% period of change</p> -->
+                </div>
+                <div class="bg-white p-4 rounded-md shadow">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-lg font-bold text-gray-700">Blocked Links</h4>
+                        <button class="text-green-500">&#36;</button>
+                    </div>
+                    <p class="text-3xl font-bold">17</p>
+                    <!-- <p class="text-green-500 mt-2">+5.34% period of change</p> -->
+                </div>
+                <!-- <div class="bg-white p-4 rounded-md shadow">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-lg font-bold text-gray-700">New customer</h4>
+                        <button class="text-indigo-500">&#128100;</button>
+                    </div>
+                    <p class="text-3xl font-bold">298</p>
+                    <p class="text-green-500 mt-2">+6.84% period of change</p>
+                </div> -->
+            </section>
+            
+            <!-- Detailed Report Table -->
+            <section class="bg-white p-6 rounded-md shadow">
+                <h2 class="font-bold text-xl mb-4">Detailed report</h2>
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr >
+                            <th class="p-2 border-b">Links</th>
+                            <th class="p-2 border-b">Duration</th>
+
+                            <th class="p-2 border-b">STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+
+                        <tr  *ngFor="let link of links">
+                            <td class="p-2 border-b">{{link.url}}</td>
+                            <td class="p-2 border-b">{{link.duration}}</td>
+                            <td class="p-2 border-b text-yellow-500">{{link.status}}</td>
+                        </tr>
+            
+                        <!-- Repeat similar rows as needed -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+<!-- 
+    private String id;  // Optional, MongoDB will generate one if not provided
+    private String url;
+    private String status;
+    private int duration;
+    private String originalMessage;
+    private String updatedMessage; -->
+
+</body>
+</html>

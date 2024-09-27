@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+        routes:
+          - id: contentmanagement-service
+            uri: lb://CONTENTMANAGEMENT-SERVICE
+            predicates:
+              - Path=/api/messages/**
+
+          - id: school-service
+            uri: lb://SCHOOL-SERVICE
+            predicates:
+              - Path=/school/**
+
+          - id: screentime-service
+            uri: lb://SCREENTIME-SERVICE
+            predicates:
+              - Path=/screentime/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
