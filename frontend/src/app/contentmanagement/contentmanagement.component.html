@@ -60,28 +60,28 @@
             <section class="grid grid-cols-3 gap-6 mb-8">
                 <div class="bg-white p-4 rounded-md shadow">
                     <div class="flex justify-between items-center mb-4">
-                        <h4 class="text-lg font-bold text-gray-700">Turnover</h4>
+                        <h4 class="text-lg font-bold text-gray-700">Total Usage</h4>
                         <button class="text-pink-500">&#128722;</button>
                     </div>
-                    <p class="text-3xl font-bold">$92,405</p>
-                    <p class="text-green-500 mt-2">+5.34% period of change</p>
+                    <p class="text-3xl font-bold">4h</p>
+                    <!-- <p class="text-green-500 mt-2">+5.34% period of change</p> -->
                 </div>
                 <div class="bg-white p-4 rounded-md shadow">
                     <div class="flex justify-between items-center mb-4">
-                        <h4 class="text-lg font-bold text-gray-700">Profit</h4>
+                        <h4 class="text-lg font-bold text-gray-700">Blocked Links</h4>
                         <button class="text-green-500">&#36;</button>
                     </div>
-                    <p class="text-3xl font-bold">$32,218</p>
-                    <p class="text-green-500 mt-2">+5.34% period of change</p>
+                    <p class="text-3xl font-bold">17</p>
+                    <!-- <p class="text-green-500 mt-2">+5.34% period of change</p> -->
                 </div>
-                <div class="bg-white p-4 rounded-md shadow">
+                <!-- <div class="bg-white p-4 rounded-md shadow">
                     <div class="flex justify-between items-center mb-4">
                         <h4 class="text-lg font-bold text-gray-700">New customer</h4>
                         <button class="text-indigo-500">&#128100;</button>
                     </div>
                     <p class="text-3xl font-bold">298</p>
                     <p class="text-green-500 mt-2">+6.84% period of change</p>
-                </div>
+                </div> -->
             </section>
             
             <!-- Detailed Report Table -->
@@ -91,6 +91,8 @@
                     <thead>
                         <tr >
                             <th class="p-2 border-b">Links</th>
+                            <th class="p-2 border-b">Duration</th>
+
                             <th class="p-2 border-b">STATUS</th>
                         </tr>
                     </thead>
@@ -98,6 +100,7 @@
 
                         <tr  *ngFor="let link of links">
                             <td class="p-2 border-b">{{link.url}}</td>
+                            <td class="p-2 border-b">{{link.duration}}</td>
                             <td class="p-2 border-b text-yellow-500">{{link.status}}</td>
                         </tr>
             
