@@ -1,7 +1,6 @@
 package com.project.SchoolService.controller;
 
 import com.project.SchoolService.domain.Exam;
-import com.project.SchoolService.service.ExamService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
