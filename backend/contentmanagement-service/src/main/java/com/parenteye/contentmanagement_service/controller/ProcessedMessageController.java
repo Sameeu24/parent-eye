@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/messages")
+@RequestMapping("/content")
 public class ProcessedMessageController {
 
     private final ProcessedMessageRepository processedMessageRepository;
