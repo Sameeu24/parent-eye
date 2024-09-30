@@ -17,9 +17,7 @@ public class ContentManagementService {
     private final RabbitTemplate rabbitTemplate;
     private final Random random = new Random();
     private final ProcessedMessageRepository processedMessageRepository;
-
-    // Attribute to store the total duration
-    private int totalDuration = 0;
+    private int cumulativeTotalDuration = 0;  // Class-level variable to accumulate total duration
 
     @Value("${rabbitmq.queue.outbound}")
     private String outboundQueue;
@@ -46,8 +44,8 @@ public class ContentManagementService {
             String updatedStatus = random.nextBoolean() ? "Allowed" : "Blocked";
 
             if ("Allowed".equals(updatedStatus)) {
-                // Add the duration to the total duration if the status is 'Allowed'
-                totalDuration += duration;
+                // Accumulate the duration to the total duration if the status is 'Allowed'
+                cumulativeTotalDuration += duration;
             }
 
             // Update the message with the new status
@@ -57,11 +55,11 @@ public class ContentManagementService {
             // Log the updated message
             System.out.println("Updated message: " + updatedMessage);
 
-            // Log the total duration
-            System.out.println("Total Duration (Allowed links only): " + totalDuration + " minute(s)");
+            // Log the cumulative total duration
+            System.out.println("Cumulative Total Duration (Allowed links only): " + cumulativeTotalDuration + " minute(s)");
 
-            // Save the message to MongoDB
-            ProcessedMessage processedMessage = new ProcessedMessage(url, updatedStatus, duration, message, updatedMessage, totalDuration);
+            // Create and save the ProcessedMessage object with the cumulativeTotalDuration
+            ProcessedMessage processedMessage = new ProcessedMessage(url, updatedStatus, duration, message, updatedMessage, cumulativeTotalDuration);
             processedMessageRepository.save(processedMessage);
 
             // Send the updated message to the outbound queue

@@ -26,13 +26,5 @@ public class ProcessedMessageController {
     }
 
     // Endpoint to get a single message by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<ProcessedMessage> getMessageById(@PathVariable String id) {
-        Optional<ProcessedMessage> message = processedMessageRepository.findById(id);
-        if (message.isPresent()) {
-            return ResponseEntity.ok(message.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+
 }
