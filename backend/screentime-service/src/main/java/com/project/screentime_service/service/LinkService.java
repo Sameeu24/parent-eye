@@ -23,8 +23,6 @@ public class LinkService {
     @Value("${rabbitmq.queue.name}")
     private String queueName;
 
-
-
     public LinkService(LinkRepository linkRepository, RabbitTemplate rabbitTemplate) {
         this.linkRepository = linkRepository;
         this.rabbitTemplate = rabbitTemplate;
@@ -43,19 +41,22 @@ public class LinkService {
         Link randomLink = links.get(random.nextInt(links.size()));
 
         // Set a random Status (either ALLOWED or BLOCKED)
-        LinkStatus randomStatus =getRandomStatus();
+        LinkStatus randomStatus = getRandomStatus();
         randomLink.setLinkStatus(randomStatus);
 
-        // Select a random duration (for example, between 1 and 10 seconds)
-        int randomDuration = 1000 * (random.nextInt(10) + 1);
+        // Select a random duration (for example, between 1 and 10 minutes)
+        int randomDurationInMinutes = random.nextInt(10) + 1;
 
-        String message = String.format("Link: %s, Status: %s, Duration: %d ms", randomLink.getUrl(), randomLink.getLinkStatus(), randomDuration);
+        // Convert the duration to milliseconds (for scheduling purposes, if needed)
+        int randomDurationInMillis = randomDurationInMinutes * 60 * 1000;
+
+        String message = String.format("Link: %s, Status: %s, Duration: %d minute(s)", randomLink.getUrl(), randomLink.getLinkStatus(), randomDurationInMinutes);
         System.out.println("Sending message: " + message);
 
         rabbitTemplate.convertAndSend(queueName, message);
 
         // Log the results
-        System.out.printf("Selected link: %s, Status: %s, Duration: %d ms%n", randomLink.getUrl(), randomLink.getLinkStatus(), randomDuration);
+        System.out.printf("Selected link: %s, Status: %s, Duration: %d minute(s)%n", randomLink.getUrl(), randomLink.getLinkStatus(), randomDurationInMinutes);
 
         // Optional: Save the updated status to the database
         linkRepository.save(randomLink);

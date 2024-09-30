@@ -31,7 +31,7 @@ public class ContentManagementService {
         System.out.println("Received message: " + message);
 
         // Extract the necessary parts from the message (URL, Status, Duration)
-        Pattern pattern = Pattern.compile("Link: (.*), Status: (.*), Duration: (\\d+) ms");
+        Pattern pattern = Pattern.compile("Link: (.*), Status: (.*), Duration: (\\d+) minute\\(s\\)");
         Matcher matcher = pattern.matcher(message);
 
         if (matcher.find()) {
