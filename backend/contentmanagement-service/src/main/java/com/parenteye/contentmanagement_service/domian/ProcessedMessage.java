@@ -18,7 +18,7 @@ public class ProcessedMessage {
     private String originalMessage;
     private String updatedMessage;
 
-    public ProcessedMessage(String url, String status, int duration, String originalMessage, String updatedMessage) {
+    public ProcessedMessage(String url, String status, int duration, String originalMessage, String updatedMessage, int totalDuration) {
         this.url = url;
         this.status = status;
         this.duration = duration;

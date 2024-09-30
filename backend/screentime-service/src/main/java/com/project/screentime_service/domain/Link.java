@@ -21,6 +21,7 @@ public class Link {
     private String url;
 
 
+
     @Enumerated(EnumType.STRING)
     private LinkStatus linkStatus;
 

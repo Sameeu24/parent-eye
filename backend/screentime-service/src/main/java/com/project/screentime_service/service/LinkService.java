@@ -44,10 +44,10 @@ public class LinkService {
         LinkStatus randomStatus = getRandomStatus();
         randomLink.setLinkStatus(randomStatus);
 
-        // Select a random duration (for example, between 1 and 10 minutes)
-        int randomDurationInMinutes = random.nextInt(10) + 1;
+        // Select a random duration between 1 and 120 minutes (2 hours max)
+        int randomDurationInMinutes = random.nextInt(120) + 1;
 
-        // Convert the duration to milliseconds (for scheduling purposes, if needed)
+        // Convert the duration to milliseconds (if needed for scheduling purposes)
         int randomDurationInMillis = randomDurationInMinutes * 60 * 1000;
 
         String message = String.format("Link: %s, Status: %s, Duration: %d minute(s)", randomLink.getUrl(), randomLink.getLinkStatus(), randomDurationInMinutes);

@@ -1,10 +1,10 @@
 package com.parenteye.contentmanagement_service.service;
+
 import com.parenteye.contentmanagement_service.repository.ProcessedMessageRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import com.parenteye.contentmanagement_service.domian.ProcessedMessage;
 
 import java.util.regex.Matcher;
@@ -17,6 +17,9 @@ public class ContentManagementService {
     private final RabbitTemplate rabbitTemplate;
     private final Random random = new Random();
     private final ProcessedMessageRepository processedMessageRepository;
+
+    // Attribute to store the total duration
+    private int totalDuration = 0;
 
     @Value("${rabbitmq.queue.outbound}")
     private String outboundQueue;
@@ -41,12 +44,24 @@ public class ContentManagementService {
 
             // Randomly modify the status (Allowed/Blocked)
             String updatedStatus = random.nextBoolean() ? "Allowed" : "Blocked";
-            String updatedMessage = message.replaceFirst("Status: [A-Za-z]+", "Status: " + updatedStatus);
 
+            if ("Allowed".equals(updatedStatus)) {
+                // Add the duration to the total duration if the status is 'Allowed'
+                totalDuration += duration;
+            }
+
+            // Update the message with the new status
+            String updatedMessage = String.format("Link: %s, Status: %s, Duration: %d minute(s)",
+                    url, updatedStatus, duration);
+
+            // Log the updated message
             System.out.println("Updated message: " + updatedMessage);
 
+            // Log the total duration
+            System.out.println("Total Duration (Allowed links only): " + totalDuration + " minute(s)");
+
             // Save the message to MongoDB
-            ProcessedMessage processedMessage = new ProcessedMessage(url, updatedStatus, duration, message, updatedMessage);
+            ProcessedMessage processedMessage = new ProcessedMessage(url, updatedStatus, duration, message, updatedMessage, totalDuration);
             processedMessageRepository.save(processedMessage);
 
             // Send the updated message to the outbound queue
