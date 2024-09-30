@@ -16,7 +16,8 @@ export class AuthService {
       this.router.navigate(['/teacher-dashboard']);
       return true;
     }
-    return false;
+    console.log('Login failed: Invalid credentials');
+  return false;
   }
 }
 
