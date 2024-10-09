@@ -28,8 +28,8 @@ public class AssignmentService {
         return assignmentRepository.findAll();
     }
     // FIND BY ID
-    public Assignment getAssignmentById(Long id){
-        Optional<Assignment> assignment = assignmentRepository.findById(id);
+    public Assignment getAssignmentById(String id){
+        Optional<Assignment> assignment = assignmentRepository.findById(Long.valueOf(id));
         if(assignment.isPresent()){
             return assignment.get();
         }else{
@@ -37,8 +37,8 @@ public class AssignmentService {
         }
     }
     //UPDATE
-    public Assignment updateAssignment(Long id, Assignment assignment){
-        if (assignmentRepository.existsById(id)){
+    public Assignment updateAssignment(String id, Assignment assignment){
+        if (assignmentRepository.existsById(Long.valueOf(id))){
             assignment.setId(id);
             return assignmentRepository.save(assignment);
         }else {

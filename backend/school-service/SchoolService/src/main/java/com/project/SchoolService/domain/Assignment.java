@@ -19,9 +19,7 @@ import java.util.Date;
 public class Assignment {
 
     @Id
-
-
-    private Long id;
+    private String id;
     private String subject;
     private String content;
     private Date date;

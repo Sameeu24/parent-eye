@@ -36,13 +36,13 @@ public class SchoolController {
 
     @GetMapping("/assignments/{id}")
     public ResponseEntity<Assignment> getAssignmentById(@PathVariable Long id) {
-        Assignment assignment = assignmentService.getAssignmentById(id);
+        Assignment assignment = assignmentService.getAssignmentById(String.valueOf(id));
         return ResponseEntity.ok(assignment);
     }
 
     @PutMapping("/assignments/{id}")
     public ResponseEntity<Assignment> updateAssignment(@PathVariable Long id, @RequestBody Assignment assignment) {
-        Assignment updatedAssignment = assignmentService.updateAssignment(id, assignment);
+        Assignment updatedAssignment = assignmentService.updateAssignment(String.valueOf(id), assignment);
         return ResponseEntity.ok(updatedAssignment);
     }
 
