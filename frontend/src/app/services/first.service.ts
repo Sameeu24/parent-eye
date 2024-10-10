@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 })
 export class FirstService {
 
-  private baseUrl="http://localhost:8100/api/messages"
+  private baseUrl="http://localhost:8100/content"
 
   constructor(private http:HttpClient){}
 

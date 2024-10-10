@@ -64,7 +64,6 @@
                         <button class="text-pink-500">&#128722;</button>
                     </div>
                     <p class="text-3xl font-bold">4h</p>
-                    <!-- <p class="text-green-500 mt-2">+5.34% period of change</p> -->
                 </div>
                 <div class="bg-white p-4 rounded-md shadow">
                     <div class="flex justify-between items-center mb-4">
@@ -72,16 +71,7 @@
                         <button class="text-green-500">&#36;</button>
                     </div>
                     <p class="text-3xl font-bold">17</p>
-                    <!-- <p class="text-green-500 mt-2">+5.34% period of change</p> -->
                 </div>
-                <!-- <div class="bg-white p-4 rounded-md shadow">
-                    <div class="flex justify-between items-center mb-4">
-                        <h4 class="text-lg font-bold text-gray-700">New customer</h4>
-                        <button class="text-indigo-500">&#128100;</button>
-                    </div>
-                    <p class="text-3xl font-bold">298</p>
-                    <p class="text-green-500 mt-2">+6.84% period of change</p>
-                </div> -->
             </section>
             
             <!-- Detailed Report Table -->
@@ -89,34 +79,29 @@
                 <h2 class="font-bold text-xl mb-4">Detailed report</h2>
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr >
+                        <tr>
                             <th class="p-2 border-b">Links</th>
                             <th class="p-2 border-b">Duration</th>
-
                             <th class="p-2 border-b">STATUS</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
-
-                        <tr  *ngFor="let link of links">
-                            <td class="p-2 border-b">{{link.url}}</td>
-                            <td class="p-2 border-b">{{link.duration}}</td>
-                            <td class="p-2 border-b text-yellow-500">{{link.status}}</td>
+                        <tr *ngFor="let link of paginatedLinks()">
+                            <td class="p-2 border-b">{{ link.url }}</td>
+                            <td class="p-2 border-b">{{ link.duration }}</td>
+                            <td class="p-2 border-b text-yellow-500">{{ link.status }}</td>
                         </tr>
-            
-                        <!-- Repeat similar rows as needed -->
                     </tbody>
                 </table>
+
+                <!-- Pagination Controls -->
+                <div class="flex justify-between mt-4">
+                    <button (click)="previousPage()" [disabled]="currentPage === 1" class="px-4 py-2 bg-gray-300 rounded-md">Previous</button>
+                    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="px-4 py-2 bg-blue-500 text-white rounded-md">Next</button>
+                </div>
             </section>
         </div>
     </div>
-<!-- 
-    private String id;  // Optional, MongoDB will generate one if not provided
-    private String url;
-    private String status;
-    private int duration;
-    private String originalMessage;
-    private String updatedMessage; -->
 
 </body>
 </html>

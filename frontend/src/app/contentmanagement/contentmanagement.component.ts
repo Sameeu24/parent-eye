@@ -14,6 +14,8 @@ import { HttpClient } from '@angular/common/http';
 export class ContentmanagementComponent implements OnInit {
 
   links:any[]=[];
+  currentPage = 1;
+  itemsPerPage = 10;
 
   constructor(private firstService:FirstService ){}
 
@@ -22,6 +24,27 @@ export class ContentmanagementComponent implements OnInit {
       this.links = data;
     });
   }
+
+  get totalPages() {
+    return Math.ceil(this.links.length / this.itemsPerPage);
+}
+
+paginatedLinks() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.links.slice(startIndex, startIndex + this.itemsPerPage);
+}
+
+nextPage() {
+    if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+    }
+}
+
+previousPage() {
+    if (this.currentPage > 1) {
+        this.currentPage--;
+    }
+}
 
 
 
